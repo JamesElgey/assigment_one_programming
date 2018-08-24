@@ -9,11 +9,12 @@ def main():
     #TODO load up csv file
     print("Menu: \nL - List all books \nA - Add a new book \nM - Mark a book as completed \nQ - Quit")
     user_choice = get_user_choice()
+    number = 0
     TITLE_NUMBER = 0
     AUTHOR_NUMBER = 0
     PAGE_COUNT = 0
     MAND_BOOK_COUNT = 0
-    AUTHOR_NUMBER, MAND_BOOK_COUNT, PAGE_COUNT, TITLE_NUMBER, number = convert_file_into_dict(AUTHOR_NUMBER,
+    AUTHOR_NUMBER, MAND_BOOK_COUNT, PAGE_COUNT, TITLE_NUMBER, number = convert_file_into_dict(number, AUTHOR_NUMBER,
                                                                                               MAND_BOOK_COUNT,
                                                                                               PAGE_COUNT,
                                                                                               TITLE_NUMBER, in_file)
@@ -24,23 +25,25 @@ def main():
             print("{} books.".format(number))
             print("You need to read {} pages in {} books.".format(PAGE_COUNT, MAND_BOOK_COUNT))
         elif user_choice == 'a':
+            print(number)
+            number = number + 1
             print("Add new book")
             new_book_title = input("What is the title of the book?")
             new_book_author = input("What is the name of the author?")
             new_book_pages = input("How many pages does the book have?")
-
+            new_book_status = input("What is the status of the book?")
+            BOOK_NAMES[number] = new_book_title
+            BOOK_AUTHOR[number] = new_book_author
+            BOOK_PAGE[number] = new_book_pages
+            BOOK_STATUS[number] = new_book_status
+            print(BOOK_NAMES)
         elif user_choice == 'm':
               print("Mark as read")
+        elif user_choice == 'p':
+            print(BOOK_NAMES)
+            print(BOOK_AUTHOR)
         else:
             print("Invalid choice")
-        TITLE_NUMBER = 0
-        AUTHOR_NUMBER = 0
-        PAGE_COUNT = 0
-        MAND_BOOK_COUNT = 0
-        AUTHOR_NUMBER, MAND_BOOK_COUNT, PAGE_COUNT, TITLE_NUMBER, number = convert_file_into_dict(AUTHOR_NUMBER,
-                                                                                                  MAND_BOOK_COUNT,
-                                                                                                  PAGE_COUNT,
-                                                                                                  TITLE_NUMBER, in_file)
         user_choice = get_user_choice()
     for x in range(number):
         if BOOK_STATUS[x] == "*":
@@ -52,11 +55,9 @@ def main():
         in_file.write(str(out_file_str))
     in_file.close()
     print("Thank you for using us")
-    #TODO save csv file
 
 
-def convert_file_into_dict(AUTHOR_NUMBER, MAND_BOOK_COUNT, PAGE_COUNT, TITLE_NUMBER, in_file):
-    number = 0
+def convert_file_into_dict(number, AUTHOR_NUMBER, MAND_BOOK_COUNT, PAGE_COUNT, TITLE_NUMBER, in_file):
     for line in in_file:
         title_count = 0
         author_count = 0
