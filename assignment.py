@@ -21,7 +21,7 @@ def main():
     while user_choice != 'q':
         if user_choice == 'l':
             for x in range(number):
-                print("{} {}. {:{}} by {:{}} {:5d} pages".format(BOOK_STATUS[x], x + 1, BOOK_NAMES[x], TITLE_NUMBER + 2, BOOK_AUTHOR[x], AUTHOR_NUMBER, BOOK_PAGE[x]))
+                print("{} {}. {:{}} by {:{}} {:5} pages".format(BOOK_STATUS[x], x + 1, BOOK_NAMES[x], TITLE_NUMBER + 2, BOOK_AUTHOR[x], AUTHOR_NUMBER, BOOK_PAGE[x]))
             print("{} books.".format(number))
             print("You need to read {} pages in {} books.".format(PAGE_COUNT, MAND_BOOK_COUNT))
         elif user_choice == 'a':
