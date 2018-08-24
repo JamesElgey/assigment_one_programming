@@ -4,7 +4,7 @@ BOOK_PAGE = {}
 BOOK_STATUS = {}
 
 def main():
-    in_file = open("book_list.csv", "r")
+    in_file = open("book_list.csv", "r+")
     print("Welcome to Reading Tracker 1.0 by James Elgey")
     #TODO load up csv file
     print("Menu: \nL - List all books \nA - Add a new book \nM - Mark a book as completed \nQ - Quit")
@@ -42,7 +42,6 @@ def main():
                                                                                                   PAGE_COUNT,
                                                                                                   TITLE_NUMBER, in_file)
         user_choice = get_user_choice()
-    out_file = open("book_list_output.csv", "w")
     for x in range(number):
         if BOOK_STATUS[x] == "*":
             BOOK_STATUS[x] = "r"
@@ -50,8 +49,8 @@ def main():
             BOOK_STATUS[x] = "c"
         out_file_str = BOOK_NAMES[x] + "," + BOOK_AUTHOR[x] + "," + str(BOOK_PAGE[x]) + "," + BOOK_STATUS[x] + "\n"
         print(out_file_str)
-        out_file.write(str(out_file_str))
-    out_file.close()
+        in_file.write(str(out_file_str))
+    in_file.close()
     print("Thank you for using us")
     #TODO save csv file
 
