@@ -25,7 +25,6 @@ def main():
             print("{} books.".format(number))
             print("You need to read {} pages in {} books.".format(PAGE_COUNT, MAND_BOOK_COUNT))
         elif user_choice == 'a':
-            print("Add new book")
             new_book_name = input("What is the title of the book?")
             new_book_author = input("What is the name of the author?")
             new_book_pages = input("How many pages does the book have?")
@@ -37,11 +36,6 @@ def main():
             number = number + 1
         elif user_choice == 'm':
               print("Mark as read")
-        elif user_choice == 'p':
-            print(BOOK_NAMES[4])
-            print(BOOK_AUTHOR[4])
-            print(BOOK_PAGE[4])
-            print(BOOK_STATUS[4])
         else:
             print("Invalid choice")
         user_choice = get_user_choice()
@@ -52,7 +46,6 @@ def main():
         elif BOOK_STATUS[x] == " ":
             BOOK_STATUS[x] = "c"
         out_file_str = BOOK_NAMES[x] + "," + BOOK_AUTHOR[x] + "," + str(BOOK_PAGE[x]) + "," + BOOK_STATUS[x] + "\n"
-        print(out_file_str)
         out_file.write(str(out_file_str))
     out_file.close()
     print("Thank you for using us")
