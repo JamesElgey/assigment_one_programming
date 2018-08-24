@@ -4,7 +4,7 @@ BOOK_PAGE = {}
 BOOK_STATUS = {}
 
 def main():
-    in_file = open("book_list.csv", "r+")
+    in_file = open("book_list.csv", "r")
     print("Welcome to Reading Tracker 1.0 by James Elgey")
     #TODO load up csv file
     print("Menu: \nL - List all books \nA - Add a new book \nM - Mark a book as completed \nQ - Quit")
@@ -25,26 +25,27 @@ def main():
             print("{} books.".format(number))
             print("You need to read {} pages in {} books.".format(PAGE_COUNT, MAND_BOOK_COUNT))
         elif user_choice == 'a':
-            print(number)
-            number = number + 1
             print("Add new book")
-            new_book_title = input("What is the title of the book?")
+            new_book_name = input("What is the title of the book?")
             new_book_author = input("What is the name of the author?")
             new_book_pages = input("How many pages does the book have?")
             new_book_status = input("What is the status of the book?")
-            BOOK_NAMES[number] = new_book_title
+            BOOK_NAMES[number] = new_book_name
             BOOK_AUTHOR[number] = new_book_author
             BOOK_PAGE[number] = new_book_pages
             BOOK_STATUS[number] = new_book_status
-            print(BOOK_NAMES)
+            number = number + 1
         elif user_choice == 'm':
               print("Mark as read")
         elif user_choice == 'p':
-            print(BOOK_NAMES)
-            print(BOOK_AUTHOR)
+            print(BOOK_NAMES[4])
+            print(BOOK_AUTHOR[4])
+            print(BOOK_PAGE[4])
+            print(BOOK_STATUS[4])
         else:
             print("Invalid choice")
         user_choice = get_user_choice()
+    out_file = open("book_list.csv", "w")
     for x in range(number):
         if BOOK_STATUS[x] == "*":
             BOOK_STATUS[x] = "r"
@@ -52,8 +53,8 @@ def main():
             BOOK_STATUS[x] = "c"
         out_file_str = BOOK_NAMES[x] + "," + BOOK_AUTHOR[x] + "," + str(BOOK_PAGE[x]) + "," + BOOK_STATUS[x] + "\n"
         print(out_file_str)
-        in_file.write(str(out_file_str))
-    in_file.close()
+        out_file.write(str(out_file_str))
+    out_file.close()
     print("Thank you for using us")
 
 
