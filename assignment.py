@@ -34,16 +34,29 @@ def main():
             book_status_dict[number] = new_book_status
             number = number + 1
         elif user_choice == 'm':
-            list_book_list(author_number, book_author_dict, book_name_dict, book_page_dict, book_status_dict,
+            if man_book_count == 0:
+                print("No required books!")
+            else:
+                list_book_list(author_number, book_author_dict, book_name_dict, book_page_dict, book_status_dict,
                            man_book_count, number, page_count, title_number)
-            marked = False
-            while marked != True:
-                try:
-                    book_mark_number = int(input("Enter the number of a book to mark as completed:"))
-                    marked = True
-                except ValueError:
-                    print("Not a valid integer!")
-            print("Done")
+                marked = False
+                while marked != True:
+                    try:
+                        book_mark_number = int(input("Enter the number of a book to mark as completed:"))
+                        book_mark_number = book_mark_number - 1
+                        while book_mark_number > number:
+                            print("Invalid number")
+                            book_mark_number = int(input("Enter the number of a book to mark as completed:"))
+                        marked = True
+                    except ValueError:
+                        print("Not a valid integer!")
+                if book_status_dict[book_mark_number] == "*":
+                    book_status_dict[book_mark_number] = " "
+                    page_count = page_count - book_page_dict[book_mark_number]
+                    man_book_count = man_book_count - 1
+                    print(book_name_dict[book_mark_number], "by", book_author_dict[book_mark_number], "completed!")
+                else:
+                    print("That book is already completed!")
         else:
             print("Invalid choice")
         user_choice = get_user_choice()
