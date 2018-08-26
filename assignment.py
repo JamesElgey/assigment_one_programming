@@ -21,10 +21,8 @@ def main():
                                                                                               title_number, in_file)
     while user_choice != 'q':
         if user_choice == 'l':
-            for x in range(number):
-                print("{} {}. {:{}} by {:{}} {:5} pages".format(book_status_dict[x], x + 1, book_name_dict[x], title_number + 2, book_author_dict[x], author_number, book_page_dict[x]))
-            print("{} books.".format(number))
-            print("You need to read {} pages in {} books.".format(page_count, man_book_count))
+            list_book_list(author_number, book_author_dict, book_name_dict, book_page_dict, book_status_dict,
+                           man_book_count, number, page_count, title_number)
         elif user_choice == 'a':
             new_book_name = input("What is the title of the book?")
             new_book_author = input("What is the name of the author?")
@@ -36,7 +34,16 @@ def main():
             book_status_dict[number] = new_book_status
             number = number + 1
         elif user_choice == 'm':
-              print("Mark as read")
+            list_book_list(author_number, book_author_dict, book_name_dict, book_page_dict, book_status_dict,
+                           man_book_count, number, page_count, title_number)
+            marked = False
+            while marked != True:
+                try:
+                    book_mark_number = int(input("Enter the number of a book to mark as completed:"))
+                    marked = True
+                except ValueError:
+                    print("Not a valid integer!")
+            print("Done")
         else:
             print("Invalid choice")
         user_choice = get_user_choice()
@@ -50,6 +57,15 @@ def main():
         out_file.write(str(out_file_str))
     out_file.close()
     print("Thank you for using us")
+
+
+def list_book_list(author_number, book_author_dict, book_name_dict, book_page_dict, book_status_dict, man_book_count,
+                   number, page_count, title_number):
+    for x in range(number):
+        print("{} {}. {:{}} by {:{}} {:5} pages".format(book_status_dict[x], x + 1, book_name_dict[x], title_number + 2,
+                                                        book_author_dict[x], author_number, book_page_dict[x]))
+    print("{} books.".format(number))
+    print("You need to read {} pages in {} books.".format(page_count, man_book_count))
 
 
 def convert_file_into_dict(book_name_dict, book_author_dict, book_page_dict, book_status_dict, number, author_number, man_book_count, page_count, title_number, in_file):
