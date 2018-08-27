@@ -1,4 +1,3 @@
-#TODO error check when adding books, all new books are required
 def main():
     in_file = open("book_list.csv", "r")
     print("Welcome to Reading Tracker 1.0 by James Elgey")
@@ -93,7 +92,7 @@ def main():
         out_file_str = book_name_dict[x] + "," + book_author_dict[x] + "," + str(book_page_dict[x]) + "," + book_status_dict[x] + "\n"
         out_file.write(str(out_file_str))
     out_file.close()
-    print("Thank you for using us")
+    print("Have a nice day :)")
 
 
 def list_book_list(author_number, book_author_dict, book_name_dict, book_page_dict, book_status_dict, man_book_count,
