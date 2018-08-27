@@ -1,7 +1,7 @@
+#TODO error check when adding books, all new books are required
 def main():
     in_file = open("book_list.csv", "r")
     print("Welcome to Reading Tracker 1.0 by James Elgey")
-    #TODO load up csv file
     print("Menu: \nL - List all books \nA - Add a new book \nM - Mark a book as completed \nQ - Quit")
     user_choice = get_user_choice()
     book_name_dict = {}
@@ -24,15 +24,37 @@ def main():
             list_book_list(author_number, book_author_dict, book_name_dict, book_page_dict, book_status_dict,
                            man_book_count, number, page_count, title_number)
         elif user_choice == 'a':
-            new_book_name = input("What is the title of the book?")
-            new_book_author = input("What is the name of the author?")
-            new_book_pages = input("How many pages does the book have?")
-            new_book_status = input("What is the status of the book?")
+            book_name_validity = False
+            book_author_validity = False
+            page_validity = False
+            while book_name_validity != True:
+                new_book_name = input("Title:")
+                while len(new_book_name) < 1:
+                    print("Input cannot be blank")
+                    new_book_name = input("Title:")
+                book_name_validity = True
+            while book_author_validity != True:
+                new_book_author = input("Author:")
+                while len(new_book_author) < 1:
+                    print("Input cannot be blank")
+                    new_book_author = input("Author:")
+                book_author_validity = True
+            while page_validity != True:
+                try:
+                    new_book_pages = int(input("Pages:"))
+                    while new_book_pages < 1:
+                        print("Number must be above 0")
+                        new_book_pages = int(input("Pages:"))
+                    page_validity = True
+                except ValueError:
+                    print("Invalid input; enter a valid number")
+            new_book_status = "*"
             book_name_dict[number] = new_book_name
             book_author_dict[number] = new_book_author
             book_page_dict[number] = new_book_pages
             book_status_dict[number] = new_book_status
             number = number + 1
+            print("{} by {}, ({} pages) added to Reading Tracker".format(new_book_name, new_book_author, new_book_pages))
         elif user_choice == 'm':
             if man_book_count == 0:
                 print("No required books!")
