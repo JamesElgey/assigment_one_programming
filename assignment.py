@@ -54,6 +54,8 @@ def main():
             book_page_dict[number] = new_book_pages
             book_status_dict[number] = new_book_status
             number = number + 1
+            page_count = page_count + new_book_pages
+            man_book_count = man_book_count + 1
             print("{} by {}, ({} pages) added to Reading Tracker".format(new_book_name, new_book_author, new_book_pages))
         elif user_choice == 'm':
             if man_book_count == 0:
